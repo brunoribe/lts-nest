@@ -1,8 +1,7 @@
-// lead.module.ts
 import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { LeadController } from './lead.controller';
-import { LeadService } from '../lead2/lead.service';
+import { LeadService } from './lead.service';
 
 @Module({
   imports: [
@@ -13,11 +12,11 @@ import { LeadService } from '../lead2/lead.service';
         options: {
           client: {
             clientId: process.env.KAFKA_CLIENT_ID,
-            brokers: [process.env.KAFKA_BROKER], // Your Kafka broker(s)
+            brokers: [process.env.KAFKA_BROKER],
           },
           consumer: {
-            groupId: process.env.KAFKA_CONSUMER_GROUP // Consumer group ID
-          }
+            groupId: process.env.KAFKA_CONSUMER_GROUP,
+          },
         },
       },
     ]),
@@ -25,4 +24,5 @@ import { LeadService } from '../lead2/lead.service';
   controllers: [LeadController],
   providers: [LeadService],
 })
+
 export class AppModule { }

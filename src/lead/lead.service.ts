@@ -11,9 +11,8 @@ export class LeadService {
   }
 
   async onModuleInit() {
-    // Subscribe to response topics if needed
-    this.kafkaClient.subscribeToResponseOf('created-lead');
     await this.kafkaClient.connect();
+    console.log('onModuleInit kafkaClient connect');
   }
 
   private prisma = new PrismaClient();
@@ -21,7 +20,7 @@ export class LeadService {
   async createLead(name: string, email: string, cookie: string) {
     const LeadFactory = this.prisma.lead;
 
-    const lead = LeadFactory.create({
+    const lead = await LeadFactory.create({
       data: {
         name,
         email,
@@ -29,6 +28,7 @@ export class LeadService {
       },
     });
 
+    console.log('Emitting created-lead event');
     this.kafkaClient.emit('created-lead', lead);
 
     return lead;
