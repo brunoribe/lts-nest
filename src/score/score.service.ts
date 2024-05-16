@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientKafka, MessagePattern, EventPattern, Payload } from '@nestjs/microservices';
+import { ClientKafka } from '@nestjs/microservices';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()

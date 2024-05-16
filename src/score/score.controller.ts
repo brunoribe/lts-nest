@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { ScoreService } from './score.service';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
