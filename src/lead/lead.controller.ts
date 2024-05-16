@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
-import { LeadService } from '../lead2/lead.service';
+import { LeadService } from './lead.service';
+import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('lead')
 export class LeadController {

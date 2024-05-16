@@ -1,4 +1,3 @@
-// lead.module.ts
 import { Module } from '@nestjs/common';
 import { ScoreController } from './score.controller';
 import { ScoreService } from './score.service';
@@ -13,11 +12,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         options: {
           client: {
             clientId: process.env.KAFKA_CLIENT_ID,
-            brokers: [process.env.KAFKA_BROKER], // Your Kafka broker(s)
+            brokers: [process.env.KAFKA_BROKER],
           },
           consumer: {
-            groupId: process.env.KAFKA_CONSUMER_GROUP // Consumer group ID
-          }
+            groupId: process.env.KAFKA_CONSUMER_GROUP,
+          },
         },
       },
     ]),
@@ -25,4 +24,5 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   controllers: [ScoreController],
   providers: [ScoreService],
 })
-export class AppModule { }
+
+export class AppModule {}
