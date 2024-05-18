@@ -1,19 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class LeadService {
   private kafkaClient: ClientKafka;
-
-  constructor(@Inject('KAFKA_CLIENT') clientKafka: ClientKafka) {
-    this.kafkaClient = clientKafka;
-  }
-
-  async onModuleInit() {
-    await this.kafkaClient.connect();
-    console.log('onModuleInit kafkaClient connect');
-  }
 
   private prisma = new PrismaClient();
 
@@ -28,13 +19,23 @@ export class LeadService {
       },
     });
 
-    console.log('Emitting created-lead event');
-    this.kafkaClient.emit('created-lead', lead);
-
     return lead;
   }
 
   async getLeads() {
     return this.prisma.lead.findMany();
+  }
+
+  async updateLeadScore(leadId: number, score: number): Promise<void> {
+    const LeadFactory = this.prisma.lead;
+
+    await LeadFactory.update({
+      where: {
+        id: leadId,
+      },
+      data: {
+        score,
+      },
+    });
   }
 }

@@ -22,4 +22,11 @@ export class EventService {
     return this.prisma.event.findMany();
   }
 
+  async getEventsByCookie(cookie: string) {
+    return this.prisma.event.findMany({
+      where: {
+        cookie,
+      },
+    });
+  }
 }

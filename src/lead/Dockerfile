@@ -15,8 +15,9 @@ RUN npm install
 
 # Bundle app source inside Docker image
 # Copy only the relevant microservice source code
-COPY ./src/lead ./
+COPY ./src/lead ./pkg
 COPY ./src/bootstrap.ts ./
+COPY ./src/types ./types
 
 # Build the TypeScript application
 RUN npm run build
