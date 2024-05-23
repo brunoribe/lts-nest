@@ -20,6 +20,7 @@ export class LeadController {
 
   @Post()
   async createLead(@Body() body: { name: string; email: string; cookie: string }) {
+    console.log("testing changing code during running");
     const newLead = await this.leadService.createLead(body.name, body.email, body.cookie);
     const payload: CreatedLeadDTO = {
       leadId: newLead.id,

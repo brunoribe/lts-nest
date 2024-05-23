@@ -68,6 +68,9 @@ services:
       KAFKA_CONSUMER_GROUP: lead
     ports:
       - "3000:3000"
+    volumes:
+      - ./src/lead:/usr/src/app/pkg
+      - /usr/src/app/node_modules
 
   event:
     build:
@@ -83,6 +86,9 @@ services:
       KAFKA_CONSUMER_GROUP: event
     ports:
       - "3001:3000"
+    volumes:
+      - ./src/event:/usr/src/app/pkg
+      - /usr/src/app/node_modules
 
   score:
     build:
@@ -98,6 +104,9 @@ services:
       KAFKA_CONSUMER_GROUP: score
     ports:
       - "3002:3000"
+    volumes:
+      - ./src/score:/usr/src/app/pkg
+      - /usr/src/app/node_modules
 
   api_gateway:
     image: nginx:latest
