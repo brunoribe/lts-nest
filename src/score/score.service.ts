@@ -24,6 +24,10 @@ export class ScoreService {
   calculateScore(events: string[]): number {
     let score = 0;
 
+    if (!events) {
+      return score;
+    }
+
     events.forEach((event) => {
       score += eventScores[event as EventType];
     });
